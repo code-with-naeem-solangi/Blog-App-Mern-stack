@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button } from "@mui/material";
-
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-
 import axios from "axios";
 import { BASE_URL } from "../constant";
 const Register = () => {

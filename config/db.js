@@ -3,6 +3,7 @@ const colors = require("colors");
 const connetDB = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URL);
+
     console.log(
       `Mongo connet succesfull ${mongoose.connection.host}`.bgMagenta.white
     );

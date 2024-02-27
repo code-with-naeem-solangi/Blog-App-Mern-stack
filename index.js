@@ -4,13 +4,12 @@ const morgan = require("morgan");
 const colors = require("colors");
 const dotenv = require("dotenv");
 const connetDB = require("./config/db");
-
-dotenv.config();
 const userRoute = require("./routes/userroute");
 const blogRoute = require("./routes/blogsRoute");
-connetDB();
-
 const app = express();
+
+connetDB();
+dotenv.config();
 
 app.use(cors());
 app.use(express.json());
@@ -18,6 +17,10 @@ app.use(morgan(`dev`));
 
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/blog", blogRoute);
+
+app.get("/", (req, res) => {
+  res.send("<h1>Server Running Sucessfully</h1>");
+});
 
 const PORT = process.env.PORT || 8080;
 
