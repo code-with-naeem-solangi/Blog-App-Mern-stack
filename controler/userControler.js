@@ -1,7 +1,6 @@
 const userModal = require("../modules/userModle");
-const passwordHash = require("password-hash");
 
-// const bcrpyt = require("bcryptjs");
+const bcrpyt = require("bcryptjs");
 
 exports.registerController = async (req, res) => {
   try {
@@ -19,7 +18,7 @@ exports.registerController = async (req, res) => {
         message: "user already exists",
       });
     }
-    const hashedPassword = passwordHash.generate("password123");
+    const hashedPassword = await bcrpyt.hash(password, 10);
 
     const user = new userModal({ username, email, password: hashedPassword });
     await user.save();
@@ -55,13 +54,13 @@ exports.loginController = async (req, res) => {
         message: "email is not registerd",
       });
     }
-    // const isMatch = bcrpyt.compare(password, user.password);
-    // if (!isMatch) {
-    //   return res.status(401).send({
-    //     success: false,
-    //     message: "invalid username or password",
-    //   });
-    // }
+    const isMatch = bcrpyt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(401).send({
+        success: false,
+        message: "invalid username or password",
+      });
+    }
     return res.status(200).send({
       success: true,
       message: "Login Succesfully",

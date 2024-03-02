@@ -8,8 +8,8 @@ const userRoute = require("./routes/userroute");
 const blogRoute = require("./routes/blogsRoute");
 const app = express();
 
-connetDB();
 dotenv.config();
+connetDB();
 
 app.use(cors());
 app.use(express.json());
