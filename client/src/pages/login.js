@@ -44,7 +44,8 @@ const Login = () => {
       }
       console.log(data, "after login succecsfull data");
     } catch (error) {
-      console.log(error.response.data);
+      toast.error(error.response.data.message);
+      console.log(error.response.data.message);
     }
   };
   return (
